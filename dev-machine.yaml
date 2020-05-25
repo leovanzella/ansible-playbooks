@@ -1,0 +1,17 @@
+- name: Install dev tools
+  hosts: localhost
+  connection: local
+  vars_files:
+    - vars.yaml
+  tasks:
+    - name: run roles
+      include_role:
+        name: "{{ role }}"
+      loop:
+        - git
+        - python
+        - tmux
+        - tools
+        - vim
+      loop_control:
+        loop_var: role

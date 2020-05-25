@@ -1,0 +1,29 @@
+- name: install vim
+  become: yes
+  apt:
+    update_cache: yes
+    name: vim
+
+- name: copy .vimrc
+  copy:
+    src: .vimrc
+    dest: "{{ ansible_env.HOME }}/.vimrc"
+
+- name: create vim plugin dirs
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+  loop:
+    - "{{ ansible_env.HOME }}/.vim/autoload"
+    - "{{ ansible_env.HOME }}/.vim/bundle"
+
+- name: copy plugin list
+  copy:
+    src: plugins.vim
+    dest: "{{ ansible_env.HOME }}/.vim/plugins.vim"
+
+- name: get vim-plug
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: "{{ ansible_env.HOME }}/.vim/autoload/plug.vim"

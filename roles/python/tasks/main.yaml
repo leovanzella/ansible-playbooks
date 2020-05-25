@@ -1,0 +1,30 @@
+- name: install python packages
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - python3-pip
+      - python3-venv
+
+- name: install python build deps for pyenv
+  become: yes
+  apt:
+    update_cache: yes
+    install_recommends: no
+    name:
+      - build-essential
+      - curl
+      - libbz2-dev
+      - libffi-dev
+      - liblzma-dev
+      - libncurses5-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - libssl-dev
+      - libxml2-dev
+      - libxmlsec1-dev
+      - llvm
+      - tk-dev
+      - wget
+      - zlib1g-dev
+      - xz-utils

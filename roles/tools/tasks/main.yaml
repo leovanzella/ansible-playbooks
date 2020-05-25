@@ -1,0 +1,29 @@
+- name: install common tools
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - silversearcher-ag
+      - fzf
+      - tree
+
+- name: create fzf scripts dir
+  file:
+    path: "{{ ansible_env.HOME }}/.fzf"
+    state: directory
+    mode: 0755
+
+- name: get fzf scripts
+  get_url:
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}"    
+    mode: 0740
+  loop:
+    - { url: "https://raw.githubusercontent.com/junegunn/fzf/master/shell/completion.bash", dest: "{{ ansible_env.HOME }}/.fzf/completion.sh" }
+    - { url: "https://raw.githubusercontent.com/junegunn/fzf/master/shell/key-bindings.bash", dest: "{{ ansible_env.HOME }}/.fzf/key-bindings.sh" }
+
+- name: add fzf bindings to bashrc
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - fzf"
+    block: . ~/.fzf/completion.sh && . ~/.fzf/key-bindings.sh

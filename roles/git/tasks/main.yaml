@@ -1,0 +1,31 @@
+- name: install git
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - git
+      - bash-completion
+
+- name: config user name
+  git_config:
+    name: user.name
+    scope: global
+    value: "{{ git_user }}"
+
+- name: config user email
+  git_config:
+    name: user.email
+    scope: global
+    value: "{{ git_email }}"
+
+- name: config core editor
+  git_config:
+    name: core.editor
+    scope: global
+    value: vim
+
+- name: config diff tool
+  git_config:
+    name: diff.tool
+    scope: global
+    value: vimdiff
