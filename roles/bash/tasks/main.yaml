@@ -1,0 +1,10 @@
+- name: download bash-powerline
+  get_url:
+    url: https://raw.githubusercontent.com/ronaldotd/bash-powerline/master/bash-powerline.sh
+    dest: "{{ ansible_env.HOME }}/.bash_powerline.sh"
+
+- name: add bash-powerline to bashrc
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - bash-powerline"
+    block: . ~/.bash_powerline.sh

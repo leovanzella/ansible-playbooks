@@ -7,7 +7,7 @@ set nocompatible
 syntax on
 
 set background=dark
-colorscheme PaperColor
+colorscheme deus
 
 set encoding=UTF-8
 
