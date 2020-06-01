@@ -1,0 +1,28 @@
+- name: install tmux and tmate
+  become: yes
+  apt:
+    update_cache: yes
+    name:
+      - tmate
+      - tmux
+
+- name: clone oh-my-tmux
+  git:
+    repo: https://github.com/gpakosz/.tmux
+    dest: "{{ ansible_env.HOME }}/.tmux"
+
+- name: create symbolic link for tmux conf
+  file:
+    src: "{{ ansible_env.HOME }}/.tmux/.tmux.conf"
+    dest: "{{ ansible_env.HOME }}/.tmux.conf"
+    state: link
+
+- name: copy tmux local conf
+  copy:
+    src: .tmux.conf.local
+    dest: "{{ ansible_env.HOME }}/.tmux.conf.local"
+
+- name: copy tmate conf
+  copy:
+    src: .tmate.conf
+    dest: "{{ ansible_env.HOME }}/.tmate.conf"
