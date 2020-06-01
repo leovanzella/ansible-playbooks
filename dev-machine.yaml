@@ -14,5 +14,6 @@
         - tmux
         - tools
         - vim
+        - docker
       loop_control:
         loop_var: role
