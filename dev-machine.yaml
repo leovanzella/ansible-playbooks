@@ -15,5 +15,6 @@
         - tools
         - vim
         - docker
+        - node
       loop_control:
         loop_var: role
