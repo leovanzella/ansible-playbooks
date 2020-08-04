@@ -2,9 +2,9 @@ call plug#begin('~/.vim/bundle')
 source ~/.vim/plugins.vim
 call plug#end()
 
-set nocompatible
-
 syntax on
+
+filetype plugin indent on
 
 set background=dark
 colorscheme deus
@@ -35,5 +35,3 @@ nnoremap <Down> :Files<CR>
 
 " close vim when nerdtree is the only window left
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-autocmd FileType python setlocal tabstop=4 shiftwidth=4
